@@ -144,3 +144,171 @@ JSX其实就是原始创建虚拟DOM的语法糖，更加便捷
 
 ### JSX的小练习
 
+   代码
+   ```html
+   <!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>JSX的小练习</title>
+</head>
+<body>
+<!-- 准备一个容器 -->
+<div id="test"></div>
+<!-- 引入React核心库 -->
+<script src="../js/react.development.js"></script>
+<!-- 引入react-dome,用于支持react操作dom -->
+<script src="../js//react-dom.development.js"></script>
+<!-- 引入bable,用于将jsx转化为js -->
+<script src="../js/babel.min.js"></script>
+<!-- /*此处一定要写bable*/ -->
+<script type="text/babel">
+   //1.创建虚拟DOM
+   const VDOM = (
+           <div>
+              <h1>前端框架列表</h1>
+              <ul>
+                 <li>Angulr</li>
+                 <li>Angulr</li>
+                 <li>Angulr</li>
+              </ul>
+           </div>
+   )
+   //2.渲染虚拟DOM到页面上
+   ReactDOM.render(VDOM,document.getElementById('test'));
+</script>
+</body>
+</html>
+```
+注意：注意区分【js语句（代码）】和【js的表达式】
+
+      ​  1. 表达式：一个表达式会产生一个值，可以放在需要值的地方
+                  下面这些都是表达式：
+                     a
+                     a+b 
+                     demo(1)  
+                     arr.map()
+                     function test(){}
+      ​  2. 语句（代码）：
+                  下面这些都是语句（代码）
+                     if(){}
+                     for(){}
+                     switch(){case:xxx;}
+
+### 模块化组件化、模块与组件的理解
+
+   #### 模块
+      1.理解：向外提供一个 特定功能的JS程序，一般就是一个JS文件
+      
+      2.为什么要拆分成模块：随着业务逻辑，代码与来越复杂
+
+      3. 作用：复用JS，简化JS的编写，提高JS运行的效率
+   #### 组件
+      1. 理解：用来实现局部功能效果代码和资源的集合（HTML/CSS/IMAGE）
+
+      2. 为什么要使用组件：一个界面的功能更复杂，使用组件可以减少这中复杂的情况
+
+      3. 作用：复用编码，简化项目，提高代码运行效率
+   #### 模块化
+      当应用的JS都以模块来写的时候，这个应用就是一个模块化的应用
+   #### 组件化 
+      当应用是以组件的方式实现的时候。这个应用就是一个组件化的应用
+
+## React面向对象的编程
+
+### 基本理解与使用
+      
+   使用React开发者测试工具调式：React Developer Tools
+   
+### 注意：
+
+      1.组件的首字母大写
+
+      2.虚拟DOM元素有且只能有一个根元素
+
+      3.虚拟DOM元素必需要有结束的标签，又开始有结束
+
+### 渲染类组件标签的基本流程
+
+      1.React内部会创建组件的实例对象
+
+      2.调用render（）得到的虚拟DOM，并解析为真是DOM
+
+      3.插入到指定的页面元素内部
+
+### 组件的三大核心属性
+
+#### state
+
+##### 理解
+
+      1.state是组件对象最重要的属性，值是对象（可以包含多个key-value的组合）
+
+      2.组件被称为“状态机”，通过更新组件的state来更新对应的页面显示（重新渲染组件）
+
+##### 注意：
+
+      1.组件中的render方法中的this为组件的实例对象
+
+      2.组件自定义的方法中的this为undefind
+
+            a.强制绑定this：通过函数对象的bind（）
+
+            b.箭头函数
+
+      3.状态数据，不能直接修改或更新
+
+#### props
+
+##### 理解：
+
+      1.每个组件对象都会有porps（properties的简写）属性
+
+      2.组件标签的所有属性都保存在props中
+
+##### 作用：
+
+      1.通过标签属性从组件外向组件内传递变化的数据
+
+      2.注意：组件内部不要修改props的数据
+
+#### 编码操作
+
+##### 内部读取某个属性的值
+
+      this.props.name
+
+##### 对props中的属性值进行类型限制和必要限制
+
+使用prop-types库进限制（需要引入prop-types库）
+
+```html
+Person.propTypes = { 
+    name: React.propTypes.string.isRequired,
+    age:React.propTypes.number
+```
+扩展属性：将对象的所有属性值，通过props进行传递
+
+```html
+<Person{....person}/>
+```
+
+默认属性值：
+
+```html
+Person.defultProps = {
+    age:1,
+    sex:'男'
+}
+```
+
+组件类的构造函数
+
+```html
+constructor(props){
+    super(props)
+    console.log(props)
+}
+```
